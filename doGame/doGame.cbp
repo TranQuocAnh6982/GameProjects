@@ -32,6 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Ball.h" />
+		<Unit filename="Entity.h" />
+		<Unit filename="Hole.h" />
+		<Unit filename="Math.h" />
+		<Unit filename="RenderWindow.h" />
+		<Unit filename="Tile.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
