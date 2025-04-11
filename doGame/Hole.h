@@ -7,7 +7,7 @@
 #include"Entity.h"
 
 class Hole : public Entity{
-    Hole(Vector2f _pos, SDL_Texture* _tex){
+    Hole(Vector2f _pos, SDL_Texture* _tex):Entity(p_pos, p_tex){
 
     }
 };

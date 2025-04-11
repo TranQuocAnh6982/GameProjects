@@ -7,7 +7,7 @@
 #include"Entity.h"
 
 class Tile: public Entity{
- Tile(Vector2f _pos, SDL_Texture* _tex){
+ Tile(Vector2f _pos, SDL_Texture* _tex):Entity(p_pos, p_tex){
 
  }
 };

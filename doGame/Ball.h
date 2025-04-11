@@ -1,6 +1,106 @@
 #ifndef BALL_H_INCLUDED
 #define BALL_H_INCLUDED
 
+#include<SDL.h>
+#include<SDL_image.h>
+#include<SDL_ttf.h>
+#include<vector>
+#include"Hole.h"
+#include"Tile.h"
+#include"Entity.h"
+#include"Math.h"
+using namespace std;
 
+class Ball: public Entity{
+private:
+    Vector2f velocity;
+    Vector2f target;
+    Vector2f launchedVelocity;
+    double velocity1D;
+    double launchedVelocity1D;
+    Vector2f initialMousePos;
+    bool canMove=true;
+    bool playedSwingFx=true;
+    int index;
+    int strokes=0;
+    int dirX=1;
+    int diry=1;
+    bool win=false;
+    double friction=0.001;
+    vector<Entity> points;
+    vector<Entity>powerBar;
+public:
+    Ball(Vector2f p_pos, SDL_Texture* p_tex, SDL_Texture* p_pointTex,
+         SDL_Texture* p_powerMTexFG, SDL_Texture* p_powerMTexBG, int p_index):Entity(p_pos, p_tex){
+        index=p_index;
+        points.push_back(Entity(Vector2f(-64, -64), p_pointsTex));
+        powerBar.push_back(Entity(Vector2f(-64, -64), p_powerMTexBG));
+        powerBar.push_back(Entity(Vector2f(-64, -64), p_powerMTexFG));
+
+    }
+    Vector2f& getVelocity(){return velocity;}
+    Vector2f& getInitialMousePos(){return initialMousePos;}
+    vector<Entity> getPoints(){return points;}
+    vector<Entity> getPowerBar(){return powerBar;}
+    int getStrokes(){return strokes;}
+    bool isWin(){return win;}
+    void vetWin(bool p_win){win = p_win;}
+    void setInitialMousePos(double x, double y){
+        initialMousePos.x=x;
+        initialMousePos.y=y;
+    }
+    void setVelocity(double x, double y){
+        velocity.x=x;
+        velocity.y=y;
+    }
+    void setLaunchedVelocity(double x, double y){
+        launchedVelocity.x=x;
+        launchedVelocity.y=y;
+    }
+    void update(double deltatime, bool mouseDown, bool mosePressed, vector<Tile>tiles, vector<Hole>holes,
+                Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx){
+        if(win){
+            if(getPos().x<target.x) setPos(getPos().x+=0.1*deltatime, getPos().y);
+            else if(getPos().x>target.x)setPos(getPos().x-=0.1*deltatime, getPos().y);
+            else if(getPos().y<target.y)setPos(getPos().x, getPos().y+=0.1*deltatime);
+            else if(getPos().y>target.y)setPos(getPos().x, getPos().y-=0.1*deltatime);
+            setscale(getScale().x-0.001*deltatime, getScale().y-0.001*deltatime);
+            return;
+        }
+        for(Hole h: holes){
+            if(getPos().x+ 4 >h.getPos().x && getPos().x+16 <h.getPos().x+20&&
+               getPos().y+ 4 >h.getPos().y && getPos().y+16 <h.getPos().y+20){
+                Mix_PlayChannel(-1, holeSfx, 0);
+                setWin(true);
+                target.x=h.getPos().x;
+                target.y=h.getPos().y +3;
+               }
+        }
+        if(mousePressed && canMove){
+            Mix_PlayChannel(-1, chargeSfx, 0 );
+            playedSwingFx=false;
+            int mouseX=0;
+            int mouseY=0;
+            SDL_GetMouseState(&mouseX, &mouseY);
+            setInitialMousePos(mouseX, mouseY);
+        }
+        if(mouseDown && canMove){
+            int mouseX=0;
+            int mouseY=0;
+            SDL_GetMouseState(&mouseX, &mouseY);
+            setVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
+            setLaunchedVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
+            velocity1D=SDL_sqrt(SDL_pow(abs(getVelocity().x), 2)+SDL_pow(abs(getVelocity().y), 2));
+            launchedVelocity1D=velocity1D;
+            points.at(0).setPos(getPos().x, getPos().y+8-32);
+            points.at(0).setAngle(SDL_atan2(velocity.y,velocity.x )*(180/3.1415)+90);
+            dirX=velocity.x/abs(velocity.x);
+            diry=velocity.y/abs(velocity.y);
+
+        }
+
+    }
+
+};
 
 #endif // BALL_H_INCLUDED

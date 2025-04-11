@@ -4,7 +4,7 @@
 #include<SDL_mixer.h>
 using namespace std;
 
-int main()
+int main(int argc, char* args[])
 {
 
 }
