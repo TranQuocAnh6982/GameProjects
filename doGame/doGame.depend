@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1744425113 source:c:\gameprojects\dogame\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	"Math.h"
+	"Entity.h"
+	"RenderWindow.h"
+	"Ball.h"
+	"Hole.h"
+	"Tile.h"
+	<iostream>
+
+1744261628 c:\gameprojects\dogame\math.h
+	<iostream>
+
+1744425371 c:\gameprojects\dogame\entity.h
+	<SDL.h>
+	<SDL_image.h>
+	"Math.h"
+
+1744336437 c:\gameprojects\dogame\renderwindow.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDl_ttf.h>
+	"Entity.h"
+	"defs.h"
+
+1744423441 c:\gameprojects\dogame\defs.h
+
+1744425662 c:\gameprojects\dogame\ball.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<vector>
+	"Hole.h"
+	"Tile.h"
+	"Entity.h"
+	"Math.h"
+	"defs.h"
+
+1744425380 c:\gameprojects\dogame\hole.h
+	<SDl.h>
+	<SDL_image.h>
+	"Math.h"
+	"Entity.h"
+
+1744425391 c:\gameprojects\dogame\tile.h
+	<SDl.h>
+	<SDL_image.h>
+	"Math.h"
+	"Entity.h"
+

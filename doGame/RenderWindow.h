@@ -6,7 +6,7 @@
 #include<SDl_ttf.h>
 #include"Entity.h"
 #include"defs.h"
-
+#include<string>
 class RenderWindow{
 private:
     SDL_Window* window;

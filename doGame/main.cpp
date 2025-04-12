@@ -9,13 +9,11 @@
 #include"Hole.h"
 #include"Tile.h"
 #include<iostream>
+#include"Game.h"
 using namespace std;
 
-int main(int argc, char* args[])
-{
+int main(int argc, char* args[]){
 
 
-   SDL_Quit;
-   TTF_Quit;
    return 0;
 }

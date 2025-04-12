@@ -9,11 +9,11 @@ class Entity{
 private:
     Vector2f pos;
     double  angle=0;
-    Vector2 scale=Vector2f(1, 1);
+    Vector2f scale=Vector2f(1, 1);
     SDL_Rect currentFrame;
     SDL_Texture* tex;
 public:
-    Entity(Vector2f _pos, SDL_Texture _tex):pos(p_pos), tex(p_tex){
+    Entity(Vector2f p_pos, SDL_Texture* p_tex):pos(p_pos), tex(p_tex){
         currentFrame.x=0;
         currentFrame.y=0;
         currentFrame.w=32;

@@ -34,6 +34,7 @@
 		</Compiler>
 		<Unit filename="Ball.h" />
 		<Unit filename="Entity.h" />
+		<Unit filename="Game.h" />
 		<Unit filename="Hole.h" />
 		<Unit filename="Math.h" />
 		<Unit filename="RenderWindow.h" />
