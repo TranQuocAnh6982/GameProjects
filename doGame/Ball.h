@@ -9,6 +9,7 @@
 #include"Tile.h"
 #include"Entity.h"
 #include"Math.h"
+#include"defs.h"
 using namespace std;
 
 class Ball: public Entity{
@@ -96,8 +97,71 @@ public:
             points.at(0).setAngle(SDL_atan2(velocity.y,velocity.x )*(180/3.1415)+90);
             dirX=velocity.x/abs(velocity.x);
             diry=velocity.y/abs(velocity.y);
+            powerBar.at(0).setPos(getPos().x +32+8, getPos().y-32);
+            powerBar.at(1).setPos(getPos().x +32+8+4, getPos().y-32+4+32-32*powerBar.at(1).getScale().y);
+            if(velocity1D>1){
+                velocity1D=1;
+                launchedVelocity1D=1;
+            }
+            powerBar.at(1).setScale(1. velocity1D/1);
 
         }
+        else{
+            if(! playedSwingFx){
+                Mix_PlayChannel(-1, swingSfx, 0);
+                playedSwingFx=true;
+                strokes++;
+            }
+            points.at(0).setPos(-64, -64);
+            powerBar.at(0).setPos(-64, -64);
+            powerBar.at(1).setPos(-64, -64);
+            canMove=false;
+            setPos(getPos().x+setVelocity().x* deltatime, getPos().y+getVelocity().y*deltatime);
+            if(abs(getVelocity().x)>0.001 || abs(getVelocity().y)>0.001){
+                if(velocity1D>0) velocity1D-=friction*deltatime;
+                else velocity1D=0;
+                velocity=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.x)*dirX;
+                velocity=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.y)*dirY;
+            }
+            else {
+                setVelocity(0, 0);
+                int mouseX=0;
+                int mouseY=0;
+                SDL_GetMouseState(mouseX, &mouseY);
+                setInitialMousePos(mouseX, mouseY);
+                canMove=true;
+            }
+            if(getPos().x+getCurrentFrame().w> WINDOW_WIDTH/(2-index)){
+                setVelocity(-abs(getVelocity().x), getVelocity().y);
+                dirX=-1;
+            }
+            else if(getPos().x<0+index*320){
+                setVelocity(abs(getVelocity().x), getVelocity().y);
+                diry=-1;
+            }
+            else if(getPos().y<0){
+                setVelocity(getVelocity().x, abs(getVelocity().y));
+                dirY=1;
+            }
+        for(Tile& t: tiles){
+            double newX=getPos().x+getVelocity().x*deltatime;
+            double newY=getPos().y;
+            if(newX+16>t.getPos().x&& newX<t.getPos().x+t.getCurrentFrame().w
+               &&newY+16>t.getPos().y&& newY<t.getPos().y+t.getCurrentFrame().h-3)    {
+                setVelocity(getVelocity().x*-1, getVelocity().y);
+                dirX *=-1;
+               }
+            newX=getPos().x;
+            newY=getPos().y+getVelocity().y*deltatime;
+            if(newX+16>t.getPos().x&& newX<t.getPos().x+t.getCurrentFrame().w
+               &&newY+16>t.getPos().y&& newY<t.getPos().y+t.getCurrentFrame().h-3){
+               setVelocity(getVelocity().x, getVelocity().y *-1);
+               dirY *=-1;
+               }
+        }
+
+        }
+
 
     }
 
