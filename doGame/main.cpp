@@ -14,4 +14,8 @@ using namespace std;
 int main(int argc, char* args[])
 {
 
+
+   SDL_Quit;
+   TTF_Quit;
+   return 0;
 }
