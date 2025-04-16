@@ -1,28 +1,28 @@
-#include<iostream>
-#include<SDL.h>
+/*#include<SDL.h>
 #include<SDL_image.h>
 #include<SDL_ttf.h>
 #include<SDL_mixer.h>
-#include "Math.h"
-#include "Entity.h"
-#include "RenderWindow.h"
-#include "Ball.h"
-#include "Hole.h"
-#include "Tile.h"
+#include"RenderWindow.h"
+#include"defs.h"
+#include"Ball.h"
+#include"Entity.h"
+#include"Tile.h"
+#include"Hole.h"
+#include"Math.h"
 #include<vector>
 #include<string>
-
 using namespace std;
 
+    SDL_Color white={255, 255, 255, 255};
+    SDL_Color black={0, 0, 0, 0};
 
 bool init(){
     if(SDL_Init(SDL_INIT_VIDEO>0)) cout<<"SDL_Init HAS FAIL. SDL_ERROR: "<<SDL_GetError()<<endl;
     if(!(IMG_Init(IMG_INIT_PNG))) cout<<"IMG_Init has fail. Error: "<<SDL_GetError()<<endl;
-    if(TTF_Init()!=0) cout<<"TTF_Init has fail. Error: "<<TTF_GetError()<<endl;
+    if(!(TTF_Init())) cout<<"TTF_Init has fail. Error: "<<SDL_GetError()<<endl;
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     return true;
 }
-    bool SDLinit=init();
     RenderWindow window(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
      SDL_Texture*ballTexture=window.loadTexture("./assets/ball.png");
      SDL_Texture*holeTexture=window.loadTexture("./assets/hole.png");
@@ -47,12 +47,10 @@ bool init(){
      Mix_Chunk* swingSfx=Mix_LoadWAV("./assets/swing.mp3");
      Mix_Chunk* holeSfx=Mix_LoadWAV("./assets/hole.mp3");
 
-     SDL_Color white={255, 255, 255, 255};
-     SDL_Color black={0, 0, 0, 0};
 
-     TTF_Font* font32= TTF_OpenFont("./assets/font.ttf", 32);
+     TTF_Font*font32=TTF_OpenFont("./assets/font.ttf", 32);
     // font48=TTF_OpenFont(" ", 48);
-     TTF_Font* font24= TTF_OpenFont("./assets/font.ttf", 24);
+     TTF_Font*font24=TTF_OpenFont("./assets/font.ttf", 24);
 
    vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
     Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
@@ -62,7 +60,7 @@ bool init(){
         switch(level){
         case 0:
             temp.push_back(Tile(Vector2f(64*3, 64*3), tiledarkTexture64));
-            temp.push_back(Tile(Vector2f(64*4, 64*3), tiledarkTexture64));
+temp.push_back(Tile(Vector2f(64*4, 64*3), tiledarkTexture64));
 
             temp.push_back(Tile(Vector2f(64*0, 64*3), tiledarkTexture64));
             temp.push_back(Tile(Vector2f(64*1, 64*3), tiledarkTexture64));
@@ -112,7 +110,7 @@ bool init(){
         }
     return temp;
   }
-    int level=0;
+  int level=0;
     vector<Tile> tiles =loadTiles(level);
     bool gameRunning=true;
     bool mouseDown=false;
@@ -139,39 +137,34 @@ bool init(){
     switch(level){
     case 0:
         balls[0].setPos(24+32*4, 24+32*11);
-        balls[1].setPos(24+32*4+320, 24+32*11);
-
+        balls[1].setPos(24+32*4+32*10, 24+32*11);
         holes.at(0).setPos(24+32*4, 22+32*2);
-        holes.at(1).setPos(24+32*4+320, 22+32*2);
-        break;
+        holes.at(1).setPos(24+32*4+32*10, 22+32*2);
+    break;
     case 1:
         balls[0].setPos(24+32*4, 24+32*11);
-        balls[1].setPos(24+32*4+320, 24+32*11);
-
+        balls[1].setPos(24+32*4+32*10, 24+32*11);
         holes.at(0).setPos(24+32*4, 22+32*2);
-        holes.at(1).setPos(24+32*4+320, 22+32*2);
-        break;
+        holes.at(1).setPos(24+32*4+32*10, 22+32*2);
+    break;
     case 2:
         balls[0].setPos(8+32*7, 8+32*10);
-        balls[1].setPos(8+32*7+320, 24+32*11);
-
+        balls[0].setPos(8+32*7+32*10, 24+32*11);
         holes.at(0).setPos(8+32*2, 6+32*5);
-        holes.at(1).setPos(8+32*4+320, 6+32*3);
-        break;
+        holes.at(1).setPos(8+32*4+32*10, 6+32*3);
+    break;
     case 3:
         balls[0].setPos(24+32*4, 24+32*5);
-        balls[1].setPos(24+32*4+320, 24+32*4);
-
+        balls[0].setPos(24+32*4+32*10, 24+32*4);
         holes.at(0).setPos(24+32*4, 22+32*1);
-        holes.at(1).setPos(24+32*4+320, 22+32*11);
-        break;
+        holes.at(1).setPos(24+32*4+32*10, 22+32*11);
+    break;
     case 4:
         balls[0].setPos(24+32*2, 24+32*12);
-        balls[1].setPos(24+32*0+320, 24+32*5);
-
+        balls[0].setPos(24+32*0+32*10, 24+32*5);
         holes.at(0).setPos(24+32*1, 22+32*1);
-        holes.at(1).setPos(24+32*0+320, 22+32*7);
-        break;
+        holes.at(1).setPos(24+32*0+32*10, 22+32*7);
+    break;
     }
   }
   const char* getStrokeText(){
@@ -227,8 +220,8 @@ bool init(){
         window.render(0, 0, bgTexture);
         for(Hole& h:holes) window.render(h);
         for(Ball& b:balls){
-            if(!b.isWin()) window.render(b.getPos().x, b.getPos().y + 4, ballShadowTexture);
-            for(Entity& e: b.getPoints()) {
+            if(!b.isWin()) window.render(b.getPos().x, b.getPos().y+4, ballShadowTexture);
+            for(Entity& e:b.getPoints()) {
                     window.render(e);
             }
             window.render(b);
@@ -241,15 +234,15 @@ bool init(){
         window.render(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
         }
         if(state!=2){
-            window.render(640/4-132/2, 480-32, levelTextBgTexture);
+            window.render(WINDOW_WIDTH/4-132/2, WINDOW_HEIGHT-32, levelTextBgTexture);
             window.renderCenter(-160, 240-16+3, getLevelText(0), font24, black);
             window.renderCenter(-160, 240-16, getLevelText(0), font24, white);
 
-            window.render(640/2+640/4-132/2, 480-32, levelTextBgTexture);
-            window.renderCenter(160, 240-16+3, getLevelText(1), font24, black);
-            window.renderCenter(160, 240-16, getLevelText(1), font24, white);
+            window.render(WINDOW_WIDTH/2+640/4, WINDOW_HEIGHT-32, levelTextBgTexture);
+            window.renderCenter(-160, 240-16+3, getLevelText(1), font24, black);
+            window.renderCenter(-160, 240-16, getLevelText(1), font24, white);
 
-            window.render(640/2-196/2, 0, uiBgTexture);
+            window.render(WINDOW_WIDTH/2-196/2, 0, uiBgTexture);
             window.renderCenter(0, -240+16+3, getStrokeText(), font24, black);
             window.renderCenter(0, -240+16, getStrokeText(), font24, white);
         }
@@ -262,13 +255,12 @@ bool init(){
     }
     void titleScreen(){
         if(SDL_GetTicks()<2000){
-            if(!swingPlayed){
-                Mix_PlayChannel(-1, swingSfx, 0);
-                swingPlayed=true;
-            }
-            while(SDL_PollEvent(&event)){
-                switch(event.type){
-                    case SDL_QUIT:
+            Mix_PlayChannel(-1, swingSfx, 0);
+            swingPlayed=true;
+        }
+        while(SDL_PollEvent(&event)){
+            switch(event.type){
+                case SDL_QUIT:
                     gameRunning=false;
                     break;
             }
@@ -279,37 +271,7 @@ bool init(){
         window.renderCenter(0, 0+3, "POLYMAS", font32, black);
         window.renderCenter(0, 0+3, "POLYMAS", font32, white);
         window.display();
-        }
-        else {
-            if(!secondSingPlayed){
-                Mix_PlayChannel(-1, swingSfx, 0);
-                secondSingPlayed=true;
-            }
-            lastTick=currentTick;
-            currentTick=SDL_GetPerformanceCounter();
-            deltatime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceCounter());
-            while(SDL_PollEvent(&event)){
-                switch(event.type){
-                    case SDL_QUIT:
-                        gameRunning=false;
-                        break;
-                    case SDL_MOUSEBUTTONDOWN:
-                        if(event.button.button==SDL_BUTTON_LEFT){
-                           Mix_PlayChannel(-1, holeSfx, 0);
-                           state=1;
-                        }
-                        break;
-                }
-        window.clear();
-        window.render(0, 0, bgTexture);
-        window.render(320-160, 240-100-50 +4*SDL_sin(SDL_GetTicks()*(3.14/1500)),  logoTexture);
-        window.render(0, 0, click2start);
-        window.renderCenter(0, 240-48+3-16*5,"LEFT CLICK TO START", font32, black);
-        window.renderCenter(0, 240-48-16*5, "LEFT CLICK TO START", font32, white);
-        window.display();
-        }
     }
-}
     void game(){
      if(state==0) titleScreen();
      else {
@@ -317,15 +279,3 @@ bool init(){
         graphics();
      }
     }
-int main(int argc, char* args[]){
-   loadLevel(level);
-   while(gameRunning){
-    game();
-   }
-    window.cleanUp();
-    TTF_CloseFont(font32);
-    TTF_CloseFont(font24);
-    SDL_Quit();
-    TTF_Quit();
-   return 0;
-}

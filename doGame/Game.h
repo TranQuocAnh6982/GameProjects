@@ -1,4 +1,4 @@
-#ifndef INIT_H_INCLUDED
+/*#ifndef INIT_H_INCLUDED
 #define INIT_H_INCLUDED
 
 #include<SDL.h>
@@ -16,6 +16,7 @@
 #include<string>
 using namespace std;
 class Game{
+    Tile tile;
     RenderWindow window;
     SDL_Texture* ballTexture, *holeTexture, *pointTexture, *tiledarkTexture32, *tiledarkTexture64, *tilelightTexture32,
                 *tilelightTexture64, *ballShadowTexture,  *bgTexture, *uiBgTexture, *levelTextBgTexture, *powerMeterTexture_FG,
@@ -26,7 +27,7 @@ class Game{
     SDL_Color black={0, 0, 0, 0};
 
     int level=0;
-    vector<Tile> tiles = Tile.loadTiles();
+    vector<Tile> tiles = tile.loadTiles();
     bool gameRunning=true;
     bool mouseDown=false;
     bool mousePressed=false;
@@ -37,7 +38,10 @@ class Game{
     Uint64 currentTick=SDL_GetPerformanceCounter();
     Uint64 lastTick=0;
     double deltatime=0;
-public:
+    vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
+    Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
+                   Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1) };
+//public:
 bool init(){
     if(SDL_Init(SDL_INIT_VIDEO>0)) cout<<"SDL_Init HAS FAIL. SDL_ERROR: "<<SDL_GetError()<<endl;
     if(!(IMG_Init(IMG_INIT_PNG))) cout<<"IMG_Init has fail. Error: "<<SDL_GetError()<<endl;
@@ -46,39 +50,35 @@ bool init(){
     return true;
 }
 void initGame(){
-     window(" ", WINDOW_WIDTH, WINDOW_HEIGHT);
-     ballTexture=window.loadTexture(" ");
-     holeTexture=window.loadTexture(" ");
-    pointTexture=window.loadTexture(" ");
-     tiledarkTexture32=window.loadTexture(" ");
-     tiledarkTexture64=window.loadTexture(" ");
-     tilelightTexture32=window.loadTexture(" ");
-    tilelightTexture64=window.loadTexture(" ");
-    ballShadowTexture=window.loadTexture(" ");
-     bgTexture=window.loadTexture(" ");
-    uiBgTexture=window.loadTexture(" ");
-     levelTextBgTexture=window.loadTexture(" ");
-     powerMeterTexture_FG=window.loadTexture(" ");
-     powerMeterTexture_BG=window.loadTexture(" ");
-     powerMeterTexture_overlay=window.loadTexture(" ");
-     logoTexture=window.loadTexture(" ");
-     click2start=window.loadTexture(" ");
-     endscreenOverlayTexture=window.loadTexture(" ");
-     splashBgTexture=window.loadTexture(" ");
+     ballTexture=window.loadTexture("assets/ball.png");
+     holeTexture=window.loadTexture("assets/hole.png");
+     pointTexture=window.loadTexture("assets/point.png");
+     tiledarkTexture32=window.loadTexture("assets/tile32_dark.png");
+     tiledarkTexture64=window.loadTexture("assets/tile64_dark.png");
+     tilelightTexture32=window.loadTexture("assets/tile32_light.png");
+    tilelightTexture64=window.loadTexture("assets/tile64_light.png");
+    ballShadowTexture=window.loadTexture("assets/ball_shadow.png");
+     bgTexture=window.loadTexture("assets/bg.png");
+    uiBgTexture=window.loadTexture("assets/UI_bg.png");
+     levelTextBgTexture=window.loadTexture("assets/levelText_bg.png");
+     powerMeterTexture_FG=window.loadTexture("asset/powermeter_fg.png");
+     powerMeterTexture_BG=window.loadTexture("asset/powermeter_bg.png");
+     powerMeterTexture_overlay=window.loadTexture("assets?powermeter_overlay.png");
+     logoTexture=window.loadTexture("assets/logo.png");
+     click2start=window.loadTexture("assets/click2start.png");
+     endscreenOverlayTexture=window.loadTexture("assets/end.png");
+     splashBgTexture=window.loadTexture("assets/splashbg.png");
 
-     chargeSfx=Mix_LoadWAV(" ");
-     swingSfx=Mix_LoadWAV(" ");
-     holeSfx=Mix_LoadWAV(" ");
+     chargeSfx=Mix_LoadWAV("assets/charge.mp3");
+     swingSfx=Mix_LoadWAV("assets/swing.mp3");
+     holeSfx=Mix_LoadWAV("asset/hole.mp3");
 
 
-     font32=TTF_OpenFont(" ", 32);
-     font48=TTF_OpenFont(" ", 48);
-     font24=TTF_OpenFont(" ", 24);
+     font32=TTF_OpenFont("assets/font.ttf", 32);
+    // font48=TTF_OpenFont(" ", 48);
+     font24=TTF_OpenFont("asset/font.ttf", 24);
 
   }
-     Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
-                   Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1) };
-    vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
 
   void loadLevel(){
     if(level>4){
@@ -91,7 +91,7 @@ void initGame(){
     balls[1].setScale(1, 1);
     balls[0].setWin(false);
     balls[1].setWin(false);
-    tiles=Tile.loadTiles(level);
+    tiles=tile.loadTiles();
     switch(level){
     case 0:
         balls[0].setPos(24+32*4, 24+32*11);
@@ -151,13 +151,13 @@ void initGame(){
             gameRunning=false;
             break;
         case SDL_MOUSEBUTTONDOWN:
-            if(event.button.button=SDL_BUTTON_LEFT){
+            if(event.button.button==SDL_BUTTON_LEFT){
                 mouseDown=true;
                 mousePressed=true;
             }
             break;
         case SDL_MOUSEBUTTONUP:
-            if(event.button.button=SDL_BUTTON_LEFT) {
+            if(event.button.button==SDL_BUTTON_LEFT) {
                     mouseDown=false;
             }
             break;
@@ -171,6 +171,7 @@ void initGame(){
                 loadLevel();
             }
         }
+  }
   }
     void graphics(){
         window.clear();
@@ -223,7 +224,7 @@ void initGame(){
             }
         }
         window.clear();
-        window.render(0. 0, bgTexture);
+        window.render(0, 0, bgTexture);
         window.render(0, 0, splashBgTexture);
         window.renderCenter(0, 0+3, "POLYMAS", font32, black);
         window.renderCenter(0, 0+3, "POLYMAS", font32, white);
@@ -236,10 +237,6 @@ void initGame(){
         graphics();
      }
     }
-    void free(){
-     window.clear();
-     TTF_CloseFont(font24);
-     TTF_CloseFont(font32);
-    }
+
 };
 #endif // INIT_H_INCLUDED

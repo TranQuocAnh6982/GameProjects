@@ -62,9 +62,9 @@ public:
                 Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx){
         if(win){
             if(getPos().x<target.x) setPos(getPos().x+=0.1*deltatime, getPos().y);
-            else if(getPos().x>target.x)setPos(getPos().x-=0.1*deltatime, getPos().y);
-            else if(getPos().y<target.y)setPos(getPos().x, getPos().y+=0.1*deltatime);
-            else if(getPos().y>target.y)setPos(getPos().x, getPos().y-=0.1*deltatime);
+            else if(getPos().x>target.x ) setPos(getPos().x-=0.1*deltatime, getPos().y);
+            else if(getPos().y<target.y) setPos(getPos().x, getPos().y+=0.1*deltatime);
+            else if(getPos().y>target.y) {setPos(getPos().x, getPos().y-=0.1*deltatime);}
             setScale(getScale().x-0.001*deltatime, getScale().y-0.001*deltatime);
             return;
         }
@@ -93,12 +93,15 @@ public:
             setLaunchedVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
             velocity1D=SDL_sqrt(SDL_pow(abs(getVelocity().x), 2)+SDL_pow(abs(getVelocity().y), 2));
             launchedVelocity1D=velocity1D;
+
             points.at(0).setPos(getPos().x, getPos().y+8-32);
             points.at(0).setAngle(SDL_atan2(velocity.y,velocity.x )*(180/3.1415)+90);
+
             dirX=velocity.x/abs(velocity.x);
             dirY=velocity.y/abs(velocity.y);
+
             powerBar.at(0).setPos(getPos().x +32+8, getPos().y-32);
-            powerBar.at(1).setPos(getPos().x +32+8+4, getPos().y-32+4+32-32*powerBar.at(1).getScale().y);
+            powerBar.at(1).setPos(getPos().x +32+8+4, getPos().y-32+4 + 32 - 32*powerBar.at(1).getScale().y);
             if(velocity1D>1){
                 velocity1D=1;
                 launchedVelocity1D=1;
@@ -117,9 +120,9 @@ public:
             powerBar.at(1).setPos(-64, -64);
             canMove=false;
             setPos(getPos().x + getVelocity().x* deltatime, getPos().y + getVelocity().y*deltatime);
-            if(abs(getVelocity().x)>0.001 || abs(getVelocity().y)>0.001){
-                if(velocity1D>0) velocity1D-=friction*deltatime;
-                else velocity1D=0;
+            if(getVelocity().x >0.001||getVelocity().x<-0.001 || getVelocity().y>0.001||getVelocity().y<-0.001){
+                if(velocity1D>0) {velocity1D-=friction*deltatime;}
+                else {velocity1D=0;}
                 velocity.x=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.x)*dirX;
                 velocity.y=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.y)*dirY;
             }
@@ -131,12 +134,16 @@ public:
                 setInitialMousePos(mouseX, mouseY);
                 canMove=true;
             }
-            if(getPos().x+getCurrentFrame().w> WINDOW_WIDTH/(2-index)){
+            if(getPos().x+getCurrentFrame().w > WINDOW_WIDTH/(2-index)){
                 setVelocity(-abs(getVelocity().x), getVelocity().y);
                 dirX=-1;
             }
-            else if(getPos().x<0+index*320){
+            else if(getPos().x<  index*320){
                 setVelocity(abs(getVelocity().x), getVelocity().y);
+                dirX=1;
+            }
+            else if(getPos().y+getCurrentFrame().h>WINDOW_HEIGHT){
+                setVelocity(getVelocity().x, -abs(getVelocity().y));
                 dirY=-1;
             }
             else if(getPos().y<0){

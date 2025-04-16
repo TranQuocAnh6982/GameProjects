@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1744425113 source:c:\gameprojects\dogame\main.cpp
+1744616430 source:c:\gameprojects\dogame\main.cpp
+	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -10,26 +11,28 @@
 	"Ball.h"
 	"Hole.h"
 	"Tile.h"
-	<iostream>
+	<vector>
+	<string>
 
 1744261628 c:\gameprojects\dogame\math.h
 	<iostream>
 
-1744425371 c:\gameprojects\dogame\entity.h
+1744693068 c:\gameprojects\dogame\entity.h
 	<SDL.h>
 	<SDL_image.h>
 	"Math.h"
 
-1744336437 c:\gameprojects\dogame\renderwindow.h
+1744693363 c:\gameprojects\dogame\renderwindow.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDl_ttf.h>
 	"Entity.h"
 	"defs.h"
+	<string>
 
-1744423441 c:\gameprojects\dogame\defs.h
+1744439756 c:\gameprojects\dogame\defs.h
 
-1744425662 c:\gameprojects\dogame\ball.h
+1744690345 c:\gameprojects\dogame\ball.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -40,15 +43,50 @@
 	"Math.h"
 	"defs.h"
 
-1744425380 c:\gameprojects\dogame\hole.h
+1744446208 c:\gameprojects\dogame\hole.h
 	<SDl.h>
 	<SDL_image.h>
 	"Math.h"
 	"Entity.h"
 
-1744425391 c:\gameprojects\dogame\tile.h
+1744466200 c:\gameprojects\dogame\tile.h
 	<SDl.h>
 	<SDL_image.h>
 	"Math.h"
+	"Entity.h"
+
+1744465108 c:\gameprojects\dogame\game.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	"RenderWindow.h"
+	"defs.h"
+	"Ball.h"
+	"Entity.h"
+	"Tile.h"
+	"Hole.h"
+	"Math.h"
+	<vector>
+	<string>
+
+1744468017 source:c:\gameprojects\dogame\game.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	"RenderWindow.h"
+	"defs.h"
+	"Ball.h"
+	"Entity.h"
+	"Tile.h"
+	"Hole.h"
+	"Math.h"
+	<vector>
+	<string>
+
+1744693121 source:c:\gameprojects\dogame\entity.cpp
+	<SDL.h>
+	<SDL_image.h>
 	"Entity.h"
 
