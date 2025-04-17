@@ -95,7 +95,7 @@ public:
             launchedVelocity1D=velocity1D;
 
             points.at(0).setPos(getPos().x, getPos().y+8-32);
-            points.at(0).setAngle(SDL_atan2(velocity.y,velocity.x )*(180/3.1415)+90);
+            points.at(0).setAngle(SDL_atan2(velocity.y,velocity.x )*(180/pi)+90);
 
             dirX=velocity.x/abs(velocity.x);
             dirY=velocity.y/abs(velocity.y);

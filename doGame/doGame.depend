@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1744616430 source:c:\gameprojects\dogame\main.cpp
+1744856701 source:c:\gameprojects\dogame\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -17,12 +17,12 @@
 1744261628 c:\gameprojects\dogame\math.h
 	<iostream>
 
-1744693068 c:\gameprojects\dogame\entity.h
+1744855798 c:\gameprojects\dogame\entity.h
 	<SDL.h>
 	<SDL_image.h>
 	"Math.h"
 
-1744693363 c:\gameprojects\dogame\renderwindow.h
+1744855518 c:\gameprojects\dogame\renderwindow.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDl_ttf.h>
@@ -30,9 +30,9 @@
 	"defs.h"
 	<string>
 
-1744439756 c:\gameprojects\dogame\defs.h
+1744856667 c:\gameprojects\dogame\defs.h
 
-1744690345 c:\gameprojects\dogame\ball.h
+1744856732 c:\gameprojects\dogame\ball.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -89,4 +89,7 @@
 	<SDL.h>
 	<SDL_image.h>
 	"Entity.h"
+
+1744854595 source:c:\gameprojects\dogame\renderwindow.cpp
+	"RenderWindow.h"
 

@@ -33,12 +33,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Ball.h" />
-		<Unit filename="Entity.cpp" />
 		<Unit filename="Entity.h" />
 		<Unit filename="Game.h" />
 		<Unit filename="Hole.h" />
 		<Unit filename="Math.h" />
-		<Unit filename="RenderWindow.cpp" />
 		<Unit filename="RenderWindow.h" />
 		<Unit filename="Tile.h" />
 		<Unit filename="defs.h" />

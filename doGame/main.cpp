@@ -302,7 +302,7 @@ bool init(){
                 }
         window.clear();
         window.render(0, 0, bgTexture);
-        window.render(320-160, 240-100-50 +4*SDL_sin(SDL_GetTicks()*(3.14/1500)),  logoTexture);
+        window.render(320-160, 240-100-50 +4*SDL_sin(SDL_GetTicks()*(pi/1500)),  logoTexture);
         window.render(0, 0, click2start);
         window.renderCenter(0, 240-48+3-16*5,"LEFT CLICK TO START", font32, black);
         window.renderCenter(0, 240-48-16*5, "LEFT CLICK TO START", font32, white);
