@@ -118,12 +118,12 @@ bool init(){
     bool mouseDown=false;
     bool mousePressed=false;
     bool swingPlayed=false;
-    bool secondSingPlayed=false;
+    bool secondSwingPlayed=false;
     SDL_Event event;
     int state=0;
     Uint64 currentTick=SDL_GetPerformanceCounter();
     Uint64 lastTick=0;
-    double deltatime=0;
+    double deltaTime=0;
   void loadLevel(int level){
     if(level>4){
         state=2;
@@ -192,7 +192,7 @@ bool init(){
   void update(){
     lastTick=currentTick;
     currentTick=SDL_GetPerformanceCounter();
-    deltatime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceCounter());
+    deltaTime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceFrequency());
     mousePressed=false;
     while(SDL_PollEvent(&event)){
         switch(event.type){
@@ -211,16 +211,16 @@ bool init(){
             }
             break;
         }
+  }
         if(state==1){
             for(Ball& b:balls){
-                b.update(deltatime, mouseDown, mousePressed, tiles, holes, chargeSfx, swingSfx, holeSfx);
+                b.update(deltaTime, mouseDown, mousePressed, tiles, holes, chargeSfx, swingSfx, holeSfx);
             }
             if(balls[0].getScale().x<-1&& balls[1].getScale().x<-1){
                 level++;
                 loadLevel(level);
             }
         }
-  }
   }
     void graphics(){
         window.clear();
@@ -281,13 +281,13 @@ bool init(){
         window.display();
         }
         else {
-            if(!secondSingPlayed){
+            if(!secondSwingPlayed){
                 Mix_PlayChannel(-1, swingSfx, 0);
-                secondSingPlayed=true;
+                secondSwingPlayed=true;
             }
             lastTick=currentTick;
             currentTick=SDL_GetPerformanceCounter();
-            deltatime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceCounter());
+            deltaTime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceFrequency());
             while(SDL_PollEvent(&event)){
                 switch(event.type){
                     case SDL_QUIT:

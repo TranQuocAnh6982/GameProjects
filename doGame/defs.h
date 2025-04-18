@@ -6,4 +6,5 @@
 #define WINDOW_TITLE "Twin-Golf"
 const double pi=3.1415;
 
+
 #endif // DEFS_H_INCLUDED

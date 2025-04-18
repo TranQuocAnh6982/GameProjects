@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1744856701 source:c:\gameprojects\dogame\main.cpp
+1744957144 source:c:\gameprojects\dogame\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -30,9 +30,9 @@
 	"defs.h"
 	<string>
 
-1744856667 c:\gameprojects\dogame\defs.h
+1744858062 c:\gameprojects\dogame\defs.h
 
-1744856732 c:\gameprojects\dogame\ball.h
+1744858698 c:\gameprojects\dogame\ball.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>

@@ -58,14 +58,14 @@ public:
         launchedVelocity.x=x;
         launchedVelocity.y=y;
     }
-    void update(double deltatime, bool mouseDown, bool mousePressed, vector<Tile>tiles, vector<Hole>holes,
+    void update(double deltaTime, bool mouseDown, bool mousePressed, vector<Tile>tiles, vector<Hole>holes,
                 Mix_Chunk* chargeSfx, Mix_Chunk* swingSfx, Mix_Chunk* holeSfx){
         if(win){
-            if(getPos().x<target.x) setPos(getPos().x+=0.1*deltatime, getPos().y);
-            else if(getPos().x>target.x ) setPos(getPos().x-=0.1*deltatime, getPos().y);
-            else if(getPos().y<target.y) setPos(getPos().x, getPos().y+=0.1*deltatime);
-            else if(getPos().y>target.y) {setPos(getPos().x, getPos().y-=0.1*deltatime);}
-            setScale(getScale().x-0.001*deltatime, getScale().y-0.001*deltatime);
+            if(getPos().x<target.x) setPos(getPos().x+=0.1*deltaTime, getPos().y);
+            else if(getPos().x>target.x ) setPos(getPos().x-=0.1*deltaTime, getPos().y);
+            else if(getPos().y<target.y) setPos(getPos().x, getPos().y+=0.1*deltaTime);
+            else if(getPos().y>target.y) {setPos(getPos().x, getPos().y-=0.1*deltaTime);}
+            setScale(getScale().x-0.001*deltaTime, getScale().y-0.001*deltaTime);
             return;
         }
         for(Hole h: holes){
@@ -119,9 +119,9 @@ public:
             powerBar.at(0).setPos(-64, -64);
             powerBar.at(1).setPos(-64, -64);
             canMove=false;
-            setPos(getPos().x + getVelocity().x* deltatime, getPos().y + getVelocity().y*deltatime);
+            setPos(getPos().x + getVelocity().x* deltaTime, getPos().y + getVelocity().y*deltaTime);
             if(getVelocity().x >0.001||getVelocity().x<-0.001 || getVelocity().y>0.001||getVelocity().y<-0.001){
-                if(velocity1D>0) {velocity1D-=friction*deltatime;}
+                if(velocity1D>0) {velocity1D-=friction*deltaTime;}
                 else {velocity1D=0;}
                 velocity.x=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.x)*dirX;
                 velocity.y=(velocity1D/launchedVelocity1D)*abs(launchedVelocity.y)*dirY;
@@ -151,7 +151,7 @@ public:
                 dirY=1;
             }
         for(Tile& t: tiles){
-            double newX=getPos().x+getVelocity().x*deltatime;
+            double newX=getPos().x+getVelocity().x*deltaTime;
             double newY=getPos().y;
             if(newX+16>t.getPos().x&& newX<t.getPos().x+t.getCurrentFrame().w
                &&newY+16>t.getPos().y&& newY<t.getPos().y+t.getCurrentFrame().h-3)    {
@@ -159,7 +159,7 @@ public:
                 dirX *=-1;
                }
             newX=getPos().x;
-            newY=getPos().y+getVelocity().y*deltatime;
+            newY=getPos().y+getVelocity().y*deltaTime;
             if(newX+16>t.getPos().x&& newX<t.getPos().x+t.getCurrentFrame().w
                &&newY+16>t.getPos().y&& newY<t.getPos().y+t.getCurrentFrame().h-3){
                setVelocity(getVelocity().x, getVelocity().y *-1);
