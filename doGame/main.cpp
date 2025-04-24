@@ -174,8 +174,8 @@ bool init(){
         break;
     }
   }
-  const char* getStrokeText(){
     int biggestStroke=0;
+  const char* getStrokeText(int biggestStroke){
     if(balls[1].getStrokes()>balls[0].getStrokes()) biggestStroke=balls[1].getStrokes();
     else biggestStroke=balls[0].getStrokes();
     string s= to_string(biggestStroke);
@@ -208,6 +208,17 @@ bool init(){
         case SDL_MOUSEBUTTONUP:
             if(event.button.button==SDL_BUTTON_LEFT) {
                     mouseDown=false;
+            }
+            break;
+        case SDL_KEYDOWN:
+            if(event.key.keysym.scancode==SDL_SCANCODE_F5) {
+                   // state=0;
+                    loadLevel(0);
+                    getStrokeText(biggestStroke);
+
+            }//
+            if(event.key.keysym.scancode==SDL_SCANCODE_ESCAPE) {
+                    exit(0);
             }
             break;
         }
@@ -250,13 +261,13 @@ bool init(){
             window.renderCenter(160, 240-16, getLevelText(1), font24, white);
 
             window.render(640/2-196/2, 0, uiBgTexture);
-            window.renderCenter(0, -240+16+3, getStrokeText(), font24, black);
-            window.renderCenter(0, -240+16, getStrokeText(), font24, white);
+            window.renderCenter(0, -240+16+3, getStrokeText(biggestStroke), font24, black);
+            window.renderCenter(0, -240+16, getStrokeText(biggestStroke), font24, white);
         }
         else {
             window.render(0, 0, endscreenOverlayTexture);
-            window.renderCenter(0, 3+32, getStrokeText(), font32, black );
-            window.renderCenter(0, 32, getStrokeText(), font32, white );
+            window.renderCenter(0, 3+32, getStrokeText(biggestStroke), font32, black );
+            window.renderCenter(0, 32, getStrokeText(biggestStroke), font32, white );
         }
       window.display();
     }
@@ -310,17 +321,15 @@ bool init(){
         }
     }
 }
-    void game(){
-     if(state==0) titleScreen();
+
+int main(int argc, char* args[]){
+   loadLevel(level);
+   while(gameRunning){
+      if(state==0) titleScreen();
      else {
         update();
         graphics();
      }
-    }
-int main(int argc, char* args[]){
-   loadLevel(level);
-   while(gameRunning){
-    game();
    }
     window.cleanUp();
     TTF_CloseFont(font32);
