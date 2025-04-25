@@ -1,87 +1,62 @@
-/*#ifndef INIT_H_INCLUDED
-#define INIT_H_INCLUDED
-
+#include<iostream>
 #include<SDL.h>
 #include<SDL_image.h>
 #include<SDL_ttf.h>
 #include<SDL_mixer.h>
-#include"RenderWindow.h"
-#include"defs.h"
-#include"Ball.h"
-#include"Entity.h"
-#include"Tile.h"
-#include"Hole.h"
-#include"Math.h"
+#include "Math.h"
+#include "Entity.h"
+#include "RenderWindow.h"
+#include "Ball.h"
+#include "Hole.h"
+#include "Tile.h"
 #include<vector>
 #include<string>
-using namespace std;
-namespace Game{
-    RenderWindow window(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_Texture* ballTexture, *holeTexture, *pointTexture, *tiledarkTexture32, *tiledarkTexture64, *tilelightTexture32,
-               *tilelightTexture64, *ballShadowTexture,  *bgTexture, *uiBgTexture, *levelTextBgTexture, *powerMeterTexture_FG,
-                *powerMeterTexture_BG, *powerMeterTexture_overlay, *logoTexture, *click2start, *endscreenOverlayTexture, *splashBgTexture;
-    Mix_Chunk* chargeSfx, *swingSfx, *holeSfx;
-    TTF_Font* font32, *font48, *font24;
-    SDL_Color white={255, 255, 255, 255};
-    SDL_Color black={0, 0, 0, 0};
 
-   int level=0;
-    //vector<Tile> tiles =loadTiles();
-    bool gameRunning=true;
-    bool mouseDown=false;
-    bool mousePressed=false;
-    bool swingPlayed=false;
-    bool secondSwingPlayed=false;
-    SDL_Event event;
-    int state=0;
-    Uint64 currentTick=SDL_GetPerformanceCounter();
-    Uint64 lastTick=0;
-    double deltaTime=0;
-    vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
-    Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
-                   Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1) };
+using namespace std;
 
 
 bool init(){
     if(SDL_Init(SDL_INIT_VIDEO>0)) cout<<"SDL_Init HAS FAIL. SDL_ERROR: "<<SDL_GetError()<<endl;
     if(!(IMG_Init(IMG_INIT_PNG))) cout<<"IMG_Init has fail. Error: "<<SDL_GetError()<<endl;
-    if(!(TTF_Init())) cout<<"TTF_Init has fail. Error: "<<SDL_GetError()<<endl;
+    if(TTF_Init()!=0) cout<<"TTF_Init has fail. Error: "<<TTF_GetError()<<endl;
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     return true;
 }
-bool SDLinit=init();
-void initGame(){
+    bool SDLinit=init();
+     RenderWindow window(WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
+     SDL_Texture*ballTexture=window.loadTexture(BALL);
+     SDL_Texture*holeTexture=window.loadTexture(HOLE);
+     SDL_Texture*pointTexture=window.loadTexture(POINT);
+     SDL_Texture*tiledarkTexture32=window.loadTexture(TILE32_DARK);
+     SDL_Texture*tiledarkTexture64=window.loadTexture(TILE64_DARK);
+     SDL_Texture*tilelightTexture32=window.loadTexture(TILE32_LIGHT);
+     SDL_Texture*tilelightTexture64=window.loadTexture(TILE64_LIGHT);
+     SDL_Texture*ballShadowTexture=window.loadTexture(BALL_SHADOW);
+     SDL_Texture*bgTexture=window.loadTexture(BACKGROUNG);
+     SDL_Texture*uiBgTexture=window.loadTexture(UI_BACKGROUND);
+     SDL_Texture*levelTextBgTexture=window.loadTexture(LEVEL_BACKGROUND);
+     SDL_Texture*powerMeterTexture_FG=window.loadTexture(POWERMETER_FG);
+     SDL_Texture*powerMeterTexture_BG=window.loadTexture(POWERMETER_BG);
+     SDL_Texture*powerMeterTexture_overlay=window.loadTexture(POWERMETER_OVERLAY);
+     SDL_Texture*logoTexture=window.loadTexture(LOGO);
+     SDL_Texture*click2start=window.loadTexture(CLICK2START);
+     SDL_Texture*endscreenOverlayTexture=window.loadTexture(ENDSCREEN);
+     SDL_Texture*splashBgTexture=window.loadTexture(SPLASH_BACKGROUND);
 
-     ballTexture=window.loadTexture("./assets/ball.png");
-     holeTexture=window.loadTexture("./assets/hole.png");
-     pointTexture=window.loadTexture("./assets/point.png");
-     tiledarkTexture32=window.loadTexture("./assets/tile32_dark.png");
-     tiledarkTexture64=window.loadTexture("./assets/tile64_dark.png");
-     tilelightTexture32=window.loadTexture("./assets/tile32_light.png");
-    tilelightTexture64=window.loadTexture("./assets/tile64_light.png");
-    ballShadowTexture=window.loadTexture("./assets/ball_shadow.png");
-     bgTexture=window.loadTexture("./assets/bg.png");
-    uiBgTexture=window.loadTexture("./assets/UI_bg.png");
-     levelTextBgTexture=window.loadTexture("./assets/levelText_bg.png");
-     powerMeterTexture_FG=window.loadTexture("./assets/powermeter_fg.png");
-     powerMeterTexture_BG=window.loadTexture("./assets/powermeter_bg.png");
-     powerMeterTexture_overlay=window.loadTexture("./assets/powermeter_overlay.png");
-     logoTexture=window.loadTexture("./assets/logo.png");
-     click2start=window.loadTexture("./assets/click2start.png");
-     endscreenOverlayTexture=window.loadTexture("./assets/end.png");
-     splashBgTexture=window.loadTexture("./assets/splashbg.png");
+     Mix_Chunk* chargeSfx=Mix_LoadWAV(CHARGE_WAV);
+     Mix_Chunk* swingSfx=Mix_LoadWAV(SWING_WAV);
+     Mix_Chunk* holeSfx=Mix_LoadWAV(HOLE_WAV);
 
-     chargeSfx=Mix_LoadWAV("./assets/charge.mp3");
-     swingSfx=Mix_LoadWAV("./assets/swing.mp3");
-     holeSfx=Mix_LoadWAV("./asset/hole.mp3");
+     SDL_Color white={255, 255, 255, 255};
+     SDL_Color black={0, 0, 0, 0};
 
+     TTF_Font* font32= TTF_OpenFont(FONT, 32);
+     TTF_Font* font24= TTF_OpenFont(FONT, 24);
 
-     font32=TTF_OpenFont("./assets/font.ttf", 32);
-    // font48=TTF_OpenFont(" ", 48);
-     font24=TTF_OpenFont("./asset/font.ttf", 24);
-
-  }
-vector<Tile> loadTiles(int level){
+     vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
+     Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
+                   Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1) };
+    vector<Tile> loadTiles(int level){
         vector<Tile> temp={};
         switch(level){
         case 0:
@@ -103,6 +78,7 @@ vector<Tile> loadTiles(int level){
         break;
         case 2:
              temp.push_back(Tile(Vector2f(32*1+32*10+16, 32*5), tilelightTexture32));
+             temp.push_back(Tile(Vector2f(32*5, 64*3), tiledarkTexture32));
         break;
         case 3:
             temp.push_back(Tile(Vector2f(32*4, 32*7), tiledarkTexture64));
@@ -136,7 +112,18 @@ vector<Tile> loadTiles(int level){
         }
     return temp;
   }
-   vector<Tile> tiles =loadTiles(level);
+    int level=0;
+    vector<Tile> tiles =loadTiles(level);
+    bool gameRunning=true;
+    bool mouseDown=false;
+    bool mousePressed=false;
+    bool swingPlayed=false;
+    bool secondSwingPlayed=false;
+    SDL_Event event;
+    int state=0;
+    Uint64 currentTick=SDL_GetPerformanceCounter();
+    Uint64 lastTick=0;
+    double deltaTime=0;
   void loadLevel(int level){
     if(level>4){
         state=2;
@@ -152,38 +139,44 @@ vector<Tile> loadTiles(int level){
     switch(level){
     case 0:
         balls[0].setPos(24+32*4, 24+32*11);
-        balls[1].setPos(24+32*4+32*10, 24+32*11);
+        balls[1].setPos(24+32*4+320, 24+32*11);
+
         holes.at(0).setPos(24+32*4, 22+32*2);
-        holes.at(1).setPos(24+32*4+32*10, 22+32*2);
-    break;
+        holes.at(1).setPos(24+32*4+320, 22+32*2);
+        break;
     case 1:
         balls[0].setPos(24+32*4, 24+32*11);
-        balls[1].setPos(24+32*4+32*10, 24+32*11);
+        balls[1].setPos(24+32*4+320, 24+32*11);
+
         holes.at(0).setPos(24+32*4, 22+32*2);
-        holes.at(1).setPos(24+32*4+32*10, 22+32*2);
-    break;
+        holes.at(1).setPos(24+32*4+320, 22+32*2);
+        break;
     case 2:
         balls[0].setPos(8+32*7, 8+32*10);
-        balls[0].setPos(8+32*7+32*10, 24+32*11);
+        balls[1].setPos(8+32*7+320, 24+32*11);
+
         holes.at(0).setPos(8+32*2, 6+32*5);
-        holes.at(1).setPos(8+32*4+32*10, 6+32*3);
-    break;
+        holes.at(1).setPos(8+32*4+320, 6+32*3);
+        break;
     case 3:
         balls[0].setPos(24+32*4, 24+32*5);
-        balls[0].setPos(24+32*4+32*10, 24+32*4);
+        balls[1].setPos(24+32*4+320, 24+32*4);
+
         holes.at(0).setPos(24+32*4, 22+32*1);
-        holes.at(1).setPos(24+32*4+32*10, 22+32*11);
-    break;
+        holes.at(1).setPos(24+32*4+320, 22+32*11);
+        break;
     case 4:
         balls[0].setPos(24+32*2, 24+32*12);
-        balls[0].setPos(24+32*0+32*10, 24+32*5);
+        balls[1].setPos(24+32*0+320, 24+32*5);
+
         holes.at(0).setPos(24+32*1, 22+32*1);
-        holes.at(1).setPos(24+32*0+32*10, 22+32*7);
-    break;
+        holes.at(1).setPos(24+32*0+320, 22+32*7);
+        break;
     }
   }
+
+  int biggestStroke=0;
   const char* getStrokeText(){
-    int biggestStroke=0;
     if(balls[1].getStrokes()>balls[0].getStrokes()) biggestStroke=balls[1].getStrokes();
     else biggestStroke=balls[0].getStrokes();
     string s= to_string(biggestStroke);
@@ -218,6 +211,19 @@ vector<Tile> loadTiles(int level){
                     mouseDown=false;
             }
             break;
+        case SDL_KEYDOWN:
+            if(event.key.keysym.scancode==SDL_SCANCODE_F5) {
+                    state=1;
+                    level=0;
+                    loadLevel(0);
+                    balls[1].setStrokes(0);
+                    balls[0].setStrokes(0);
+
+            }
+            if(event.key.keysym.scancode==SDL_SCANCODE_ESCAPE) {
+                    exit(0);
+            }
+            break;
         }
   }
         if(state==1){
@@ -235,8 +241,8 @@ vector<Tile> loadTiles(int level){
         window.render(0, 0, bgTexture);
         for(Hole& h:holes) window.render(h);
         for(Ball& b:balls){
-            if(!b.isWin()) window.render(b.getPos().x, b.getPos().y+4, ballShadowTexture);
-            for(Entity& e:b.getPoints()) {
+            if(!b.isWin()) window.render(b.getPos().x, b.getPos().y + 4, ballShadowTexture);
+            for(Entity& e: b.getPoints()) {
                     window.render(e);
             }
             window.render(b);
@@ -249,15 +255,15 @@ vector<Tile> loadTiles(int level){
         window.render(b.getPowerBar().at(0).getPos().x, b.getPowerBar().at(0).getPos().y, powerMeterTexture_overlay);
         }
         if(state!=2){
-            window.render(WINDOW_WIDTH/4-132/2, WINDOW_HEIGHT-32, levelTextBgTexture);
+            window.render(640/4-132/2, 480-32, levelTextBgTexture);
             window.renderCenter(-160, 240-16+3, getLevelText(0), font24, black);
             window.renderCenter(-160, 240-16, getLevelText(0), font24, white);
 
-            window.render(WINDOW_WIDTH/2+640/4, WINDOW_HEIGHT-32, levelTextBgTexture);
-            window.renderCenter(-160, 240-16+3, getLevelText(1), font24, black);
-            window.renderCenter(-160, 240-16, getLevelText(1), font24, white);
+            window.render(640/2+640/4-132/2, 480-32, levelTextBgTexture);
+            window.renderCenter(160, 240-16+3, getLevelText(1), font24, black);
+            window.renderCenter(160, 240-16, getLevelText(1), font24, white);
 
-            window.render(WINDOW_WIDTH/2-196/2, 0, uiBgTexture);
+            window.render(640/2-196/2, 0, uiBgTexture);
             window.renderCenter(0, -240+16+3, getStrokeText(), font24, black);
             window.renderCenter(0, -240+16, getStrokeText(), font24, white);
         }
@@ -265,10 +271,12 @@ vector<Tile> loadTiles(int level){
             window.render(0, 0, endscreenOverlayTexture);
             window.renderCenter(0, 3+32, getStrokeText(), font32, black );
             window.renderCenter(0, 32, getStrokeText(), font32, white );
+            window.renderCenter(0, 64, "F5 to Restart", font24, white);
+            window.renderCenter(0, 88, "ESC to Exit", font24, white);
         }
       window.display();
     }
-     void titleScreen(){
+    void titleScreen(){
         if(SDL_GetTicks()<2000){
             if(!swingPlayed){
                 Mix_PlayChannel(-1, swingSfx, 0);
@@ -318,19 +326,5 @@ vector<Tile> loadTiles(int level){
         }
     }
 }
-   /* void games(){
-     if(state==0) titleScreen();
-     else {
-        update();
-        graphics();
-     }
-    }*/
 
-    void free(){
-    window.cleanUp();
-    TTF_CloseFont(font32);
-    TTF_CloseFont(font24);
-    }
 
-};
-#endif // INIT_H_INCLUDED

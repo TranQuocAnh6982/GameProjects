@@ -44,6 +44,10 @@ public:
     vector<Entity> getPoints(){return points;}
     vector<Entity> getPowerBar(){return powerBar;}
     int getStrokes(){return strokes;}
+    int setStrokes(int stro){
+        strokes=stro;
+        return strokes;
+    }
     bool isWin(){return win;}
     void setWin(bool p_win){win = p_win;}
     void setInitialMousePos(double x, double y){

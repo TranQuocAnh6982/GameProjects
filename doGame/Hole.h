@@ -8,9 +8,7 @@
 
 class Hole : public Entity{
     public:
-    Hole(Vector2f p_pos, SDL_Texture* p_tex):Entity(p_pos, p_tex){
-
-    }
+    Hole(Vector2f p_pos, SDL_Texture* p_tex):Entity(p_pos, p_tex){}
 };
 
 #endif // HOLE_H_INCLUDED
