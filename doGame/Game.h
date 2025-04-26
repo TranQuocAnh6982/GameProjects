@@ -61,33 +61,37 @@ bool init(){
         switch(level){
         case 0:
             temp.push_back(Tile(Vector2f(64*3, 64*3), tiledarkTexture64));
-            temp.push_back(Tile(Vector2f(64*4, 64*3), tiledarkTexture64));
+            temp.push_back(Tile(Vector2f(64*2, 64*5), tiledarkTexture32));
 
             temp.push_back(Tile(Vector2f(64*0, 64*3), tiledarkTexture64));
             temp.push_back(Tile(Vector2f(64*1, 64*3), tiledarkTexture64));
 
-            temp.push_back(Tile(Vector2f(64*3+64*5, 64*3), tilelightTexture64));
-            temp.push_back(Tile(Vector2f(64*4+64*5, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*3+320, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*1+320, 64*1), tilelightTexture32));
 
-            temp.push_back(Tile(Vector2f(64*0+64*5, 64*3), tilelightTexture64));
-            temp.push_back(Tile(Vector2f(64*1+64*5, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*0+320, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*1+320, 64*3), tilelightTexture64));
         break;
         case 1:
             temp.push_back(Tile(Vector2f(64*2, 64*3), tiledarkTexture64));
-            temp.push_back(Tile(Vector2f(64*4+64*5, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*4+320, 64*3), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(64*3, 64*2), tiledarkTexture32));
+            temp.push_back(Tile(Vector2f(64*2+320, 64*5), tilelightTexture32));
         break;
         case 2:
-             temp.push_back(Tile(Vector2f(32*1+32*10+16, 32*5), tilelightTexture32));
+             temp.push_back(Tile(Vector2f(32*2+320, 32*5), tilelightTexture32));
              temp.push_back(Tile(Vector2f(32*5, 64*3), tiledarkTexture32));
+             temp.push_back(Tile(Vector2f(32*7, 64*2), tiledarkTexture64));
+             temp.push_back(Tile(Vector2f(32*4+320, 32*7), tilelightTexture64));
         break;
         case 3:
             temp.push_back(Tile(Vector2f(32*4, 32*7), tiledarkTexture64));
             temp.push_back(Tile(Vector2f(32*3, 32*5), tiledarkTexture32));
             temp.push_back(Tile(Vector2f(32*6, 32*3), tiledarkTexture32));
 
-            temp.push_back(Tile(Vector2f(32*4+ 64*5, 32*2), tilelightTexture64));
-            temp.push_back(Tile(Vector2f(32*3+ 32*10, 32*6), tilelightTexture32));
-            temp.push_back(Tile(Vector2f(32*6+ 32*10, 32*9), tilelightTexture32));
+            temp.push_back(Tile(Vector2f(32*4+ 320, 32*2), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(32*3+ 320, 32*6), tilelightTexture32));
+            temp.push_back(Tile(Vector2f(32*6+ 320, 32*9), tilelightTexture32));
         break;
         case 4:
             temp.push_back(Tile(Vector2f(32*3, 32*1), tiledarkTexture32));
@@ -102,12 +106,12 @@ bool init(){
 
             temp.push_back(Tile(Vector2f(32*8, 32*7), tiledarkTexture64));
 
-            temp.push_back(Tile(Vector2f(32*2+32*10, 32*2), tilelightTexture32));
-            temp.push_back(Tile(Vector2f(32*5+32*10, 32*11), tilelightTexture32));
+            temp.push_back(Tile(Vector2f(32*2+320, 32*2), tilelightTexture32));
+            temp.push_back(Tile(Vector2f(32*5+320, 32*11), tilelightTexture32));
 
-            temp.push_back(Tile(Vector2f(32*3+32*10, 32*1), tilelightTexture64));
-            temp.push_back(Tile(Vector2f(32*8+32*10, 32*6), tilelightTexture64));
-            temp.push_back(Tile(Vector2f(32*3+32*10, 32*11), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(32*3+320, 32*1), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(32*8+320, 32*6), tilelightTexture64));
+            temp.push_back(Tile(Vector2f(32*3+320, 32*11), tilelightTexture64));
         break;
         }
     return temp;
@@ -236,7 +240,7 @@ bool init(){
             }
         }
   }
-    void graphics(){
+  void graphics(){
         window.clear();
         window.render(0, 0, bgTexture);
         for(Hole& h:holes) window.render(h);
@@ -269,14 +273,14 @@ bool init(){
         }
         else {
             window.render(0, 0, endscreenOverlayTexture);
-            window.renderCenter(0, 3+32, getStrokeText(), font32, black );
-            window.renderCenter(0, 32, getStrokeText(), font32, white );
+            window.renderCenter(0, 3+20, getStrokeText(), font32, black );
+            window.renderCenter(0, 20, getStrokeText(), font32, white );
             window.renderCenter(0, 64, "F5 to Restart", font24, white);
             window.renderCenter(0, 88, "ESC to Exit", font24, white);
         }
       window.display();
     }
-    void titleScreen(){
+  void titleScreen(){
         if(SDL_GetTicks()<2000){
             if(!swingPlayed){
                 Mix_PlayChannel(-1, swingSfx, 0);
