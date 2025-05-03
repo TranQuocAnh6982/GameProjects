@@ -93,8 +93,8 @@ public:
             int mouseX=0;
             int mouseY=0;
             SDL_GetMouseState(&mouseX, &mouseY);
-            setVelocity((mouseX-getInitialMousePos().x)/-100, (mouseY-getInitialMousePos().y)/-100);
-            setLaunchedVelocity((mouseX-getInitialMousePos().x)/-100, (mouseY-getInitialMousePos().y)/-100);
+            setVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
+            setLaunchedVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
             velocity1D=SDL_sqrt(SDL_pow(abs(getVelocity().x), 2)+SDL_pow(abs(getVelocity().y), 2));
             launchedVelocity1D=velocity1D;
 
@@ -105,7 +105,7 @@ public:
             dirY=velocity.y/abs(velocity.y);
 
             powerBar.at(0).setPos(getPos().x +32+8, getPos().y-32);
-            powerBar.at(1).setPos(getPos().x +32+8+4, getPos().y-32+4 + 32 - 32*powerBar.at(1).getScale().y);
+            powerBar.at(1).setPos(getPos().x +32+8+4, getPos().y +4- 32*powerBar.at(1).getScale().y);
             if(velocity1D>1){
                 velocity1D=1;
                 launchedVelocity1D=1;
