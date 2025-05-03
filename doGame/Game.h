@@ -279,45 +279,25 @@ bool init(){
       window.display();
     }
   void titleScreen(){
-        if(SDL_GetTicks()<2000){
-            if(!swingPlayed){
-                Mix_PlayChannel(-1, swingSfx, 0);
-                swingPlayed=true;
-            }
-            while(SDL_PollEvent(&event)){
-                switch(event.type){
-                    case SDL_QUIT:
+        if(!secondSwingPlayed){
+            Mix_PlayChannel(-1, swingSfx, 0);
+            secondSwingPlayed=true;
+        }
+        lastTick=currentTick;
+        currentTick=SDL_GetPerformanceCounter();
+        deltaTime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceFrequency());
+        while(SDL_PollEvent(&event)){
+            switch(event.type){
+                case SDL_QUIT:
                     gameRunning=false;
                     break;
+                case SDL_MOUSEBUTTONDOWN:
+                    if(event.button.button==SDL_BUTTON_LEFT){
+                       Mix_PlayChannel(-1, holeSfx, 0);
+                       state=1;
+                    }
+                    break;
             }
-        }
-        window.clear();
-        window.render(0, 0, bgTexture);
-        window.render(0, 0, splashBgTexture);
-        window.renderCenter(0, 0+3, "POLYMAS", font32, black);
-        window.renderCenter(0, 0+3, "POLYMAS", font32, white);
-        window.display();
-        }
-        else {
-            if(!secondSwingPlayed){
-                Mix_PlayChannel(-1, swingSfx, 0);
-                secondSwingPlayed=true;
-            }
-            lastTick=currentTick;
-            currentTick=SDL_GetPerformanceCounter();
-            deltaTime=(double)((currentTick-lastTick)*1000/(double)SDL_GetPerformanceFrequency());
-            while(SDL_PollEvent(&event)){
-                switch(event.type){
-                    case SDL_QUIT:
-                        gameRunning=false;
-                        break;
-                    case SDL_MOUSEBUTTONDOWN:
-                        if(event.button.button==SDL_BUTTON_LEFT){
-                           Mix_PlayChannel(-1, holeSfx, 0);
-                           state=1;
-                        }
-                        break;
-                }
         window.clear();
         window.render(0, 0, bgTexture);
         window.render(320-160, 240-100-50 +4*SDL_sin(SDL_GetTicks()*(pi/1500)),  logoTexture);
@@ -326,7 +306,4 @@ bool init(){
         window.renderCenter(0, 240-48-16*5, "LEFT CLICK TO START", font32, white);
         window.display();
         }
-    }
 }
-
-
