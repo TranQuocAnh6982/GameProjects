@@ -24,6 +24,7 @@
 #define SPLASH_BACKGROUND "./assets/splashbg.png"
 #define CHARGE_WAV "./assets/charge.mp3"
 #define SWING_WAV "./assets/swing.mp3"
+#define BG_MUSIC"./assets/bgmusic.mp3"
 #define HOLE_WAV "./assets/hole.mp3"
 #define FONT "./assets/font.ttf"
 const double pi=3.1415;

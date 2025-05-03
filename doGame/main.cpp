@@ -10,14 +10,16 @@
 #include "Hole.h"
 #include "Tile.h"
 #include"Game.h"
-
+#include"music.h"
 
 
 int main(int argc, char* args[]){
-   loadLevel(level);
-   while(gameRunning){
+    Music mus{BG_MUSIC};
+    mus.play();
+    loadLevel(level);
+    while(gameRunning){
       if(state==0) titleScreen();
-     else {
+      else {
         update();
         graphics();
      }

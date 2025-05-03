@@ -11,7 +11,7 @@
 #include "Tile.h"
 #include<vector>
 #include<string>
-
+#include"music.h"
 using namespace std;
 
 
@@ -46,13 +46,11 @@ bool init(){
      Mix_Chunk* chargeSfx=Mix_LoadWAV(CHARGE_WAV);
      Mix_Chunk* swingSfx=Mix_LoadWAV(SWING_WAV);
      Mix_Chunk* holeSfx=Mix_LoadWAV(HOLE_WAV);
-
      SDL_Color white={255, 255, 255, 255};
      SDL_Color black={0, 0, 0, 0};
 
      TTF_Font* font32= TTF_OpenFont(FONT, 32);
      TTF_Font* font24= TTF_OpenFont(FONT, 24);
-
      vector<Hole> holes={Hole(Vector2f(0, 0), holeTexture), Hole(Vector2f(0, 0), holeTexture) };
      Ball balls[2]={Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 0),
                    Ball(Vector2f(0, 0), ballTexture, pointTexture, powerMeterTexture_FG, powerMeterTexture_BG, 1) };
