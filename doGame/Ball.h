@@ -73,8 +73,8 @@ public:
             return;
         }
         for(Hole h: holes){
-            if(getPos().x+ 4 >h.getPos().x && getPos().x+16 <h.getPos().x+20&&
-               getPos().y+ 4 >h.getPos().y && getPos().y+16 <h.getPos().y+20){
+            if(getPos().x+ 4 >h.getPos().x && getPos().x <h.getPos().x+4&&
+               getPos().y+ 4 >h.getPos().y && getPos().y <h.getPos().y+4){
                 Mix_PlayChannel(-1, holeSfx, 0);
                 setWin(true);
                 target.x=h.getPos().x;
