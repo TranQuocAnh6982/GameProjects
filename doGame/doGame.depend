@@ -32,7 +32,7 @@
 
 1746240524 c:\gameprojects\dogame\defs.h
 
-1746249249 c:\gameprojects\dogame\ball.h
+1746250733 c:\gameprojects\dogame\ball.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -55,7 +55,7 @@
 	"Math.h"
 	"Entity.h"
 
-1746243894 c:\gameprojects\dogame\game.h
+1746250617 c:\gameprojects\dogame\game.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>

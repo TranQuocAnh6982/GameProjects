@@ -93,8 +93,8 @@ public:
             int mouseX=0;
             int mouseY=0;
             SDL_GetMouseState(&mouseX, &mouseY);
-            setVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
-            setLaunchedVelocity((mouseX-getInitialMousePos().x)/-150, (mouseY-getInitialMousePos().y)/-150);
+            setVelocity((mouseX-getInitialMousePos().x)/-100, (mouseY-getInitialMousePos().y)/-100);
+            setLaunchedVelocity((mouseX-getInitialMousePos().x)/-100, (mouseY-getInitialMousePos().y)/-100);
             velocity1D=SDL_sqrt(SDL_pow(abs(getVelocity().x), 2)+SDL_pow(abs(getVelocity().y), 2));
             launchedVelocity1D=velocity1D;
 

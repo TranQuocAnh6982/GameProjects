@@ -169,10 +169,10 @@ bool init(){
         break;
     case 4:
         balls[0].setPos(24+32*2, 24+32*12);
-        balls[1].setPos(24+32*0+320, 24+32*5);
+        balls[1].setPos(24+320, 24+32*5);
 
         holes.at(0).setPos(24+32*1, 22+32*1);
-        holes.at(1).setPos(24+32*0+320, 22+32*7);
+        holes.at(1).setPos(24+320, 22+32*7);
         break;
     }
   }
@@ -300,10 +300,10 @@ bool init(){
             }
         window.clear();
         window.render(0, 0, bgTexture);
-        window.render(320-160, 240-100-50 +4*SDL_sin(SDL_GetTicks()*(pi/1500)),  logoTexture);
+        window.render(160, 90 +4*SDL_sin(SDL_GetTicks()*(pi/1500)),  logoTexture);
         window.render(0, 0, click2start);
-        window.renderCenter(0, 240-48+3-16*5,"LEFT CLICK TO START", font32, black);
-        window.renderCenter(0, 240-48-16*5, "LEFT CLICK TO START", font32, white);
+        window.renderCenter(0, 240-3-16*8,"CLICK TO START", font32, black);
+        window.renderCenter(0, 240-16*8, "CLICK TO START", font32, white);
         window.display();
         }
 }
