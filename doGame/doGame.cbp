@@ -41,6 +41,7 @@
 		<Unit filename="Tile.h" />
 		<Unit filename="defs.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="music.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

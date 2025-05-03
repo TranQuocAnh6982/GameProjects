@@ -2,20 +2,43 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Game.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+	<File name="Tile.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="9679" topLine="216" />
+			<Cursor1 position="239" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Game.h" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12183" topLine="271" />
 		</Cursor>
 		<Folding>
-			<Collapse line="17" />
-			<Collapse line="55" />
-			<Collapse line="181" />
+			<Collapse line="54" />
+			<Collapse line="180" />
+			<Collapse line="187" />
 		</Folding>
+	</File>
+	<File name="Math.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
 	<File name="defs.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1075" topLine="7" />
+			<Cursor1 position="136" topLine="0" />
 		</Cursor>
+	</File>
+	<File name="RenderWindow.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3673" topLine="5" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="23" />
+			<Collapse line="34" />
+			<Collapse line="48" />
+			<Collapse line="62" />
+			<Collapse line="83" />
+		</Folding>
 	</File>
 	<File name="Hole.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -35,7 +58,7 @@
 	</File>
 	<File name="Ball.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6861" topLine="21" />
+			<Cursor1 position="6861" topLine="101" />
 		</Cursor>
 		<Folding>
 			<Collapse line="33" />
@@ -44,32 +67,14 @@
 			<Collapse line="60" />
 		</Folding>
 	</File>
-	<File name="Tile.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="239" topLine="0" />
+			<Cursor1 position="490" topLine="8" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="music.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="302" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="RenderWindow.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3673" topLine="5" />
-		</Cursor>
-		<Folding>
-			<Collapse line="15" />
-			<Collapse line="23" />
-			<Collapse line="34" />
-			<Collapse line="48" />
-			<Collapse line="62" />
-			<Collapse line="83" />
-		</Folding>
-	</File>
-	<File name="Math.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="322" topLine="18" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
