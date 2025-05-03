@@ -25,3 +25,5 @@ Checklist
  -sound
  
  -Background music
+ 
+ -Xử lý va chạm
