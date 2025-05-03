@@ -2,7 +2,7 @@ Tên: Trần Quốc Anh
 
 MSV: 24021378
 
-Chủ đề: Golf
+Chủ đề: Twin Golf. Người chơi sẽ điều khiển 2 quả bóng cùng lúc.
 
 Tham khảo 
 
