@@ -3,7 +3,7 @@ MSV: 24021378
 Chủ đề: Golf
 Tham khảo 
  -https://github.com/PolyMarsDev/Twini-Golf/blob/main/src/RenderWindow.h
- -code cô 
+ -code cô Châu
 Checklist
  -background
  -event chuột
